@@ -1,0 +1,14 @@
+.DS_STORE
+*.log
+
+dist
+coverage
+.idea/
+*.iml
+
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless

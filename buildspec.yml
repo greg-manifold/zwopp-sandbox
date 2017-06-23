@@ -3,9 +3,9 @@ phases:
   install:
     commands:
       - npm install
-      - npm run install:lambda
   build:
     commands:
+      - npm run predeploy:cicd
       - npm run deploy:cicd
   post_build:
     commands:

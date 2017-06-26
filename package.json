@@ -6,10 +6,11 @@
   "license": "MIT",
   "dependencies": {
     "request": "^2.81.0",
+    "serverless": "^1.16.1",
+    "mocha": "^3.4.2",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.4.2",
     "serverless-mocha-plugin": "^1.3.5",
     "serverless-offline": "^3.14.2"
   },
@@ -17,8 +18,8 @@
     "test": "./node_modules/mocha",
     "test:remote": "mkdir -p .build; . ./helpers/setEnv.sh; npm run test",
     "clean": "rm -rf node_modules",
-    "deploy": "./node_modules/serverless deploy | tee .build/deploy.out",
-    "deploy:cicd": "./node_modules/serverless deploy --stage cicd | tee .build/deploy.out",
+    "deploy": "./node_modules/.bin/serverless deploy | tee .build/deploy.out",
+    "deploy:cicd": "./node_modules/.bin/serverless deploy --stage cicd | tee .build/deploy.out",
     "predeploy": "mkdir -p .build",
     "predeploy:cicd": "npm run predeploy"
   }

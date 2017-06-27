@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Not the right endpoint. How do we get the path to the newly generated endpoint for this build?
-export TODOS_ENDPOINT=https://ecvzwmgylk.execute-api.us-east-2.amazonaws.com/beta
+node ./helper/getEndpoint.js > .build/endpoint.out
+export TODOS_ENDPOINT=`cat .build/endpoint.out`
 
 echo $TODOS_ENDPOINT

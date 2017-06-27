@@ -6,8 +6,7 @@ describe('Create, Update, Delete', function() {
 	this.timeout(5000);
     it('should create a new Todo, update it, verify the update, & delete it', function(done) {
 		// Build and log the path
-		// Added the HTTP env so that the tests can run against a local server
-		var path = process.env.HTTPorHTTPS + "://" + process.env.TODOS_ENDPOINT + "/todos";
+		var path = process.env.TODOS_ENDPOINT + "/todos";
 
 		// Fetch the comparison payload
 		require.extensions['.txt'] = function (module, filename) {

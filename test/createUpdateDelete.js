@@ -6,7 +6,8 @@ describe('Create, Update, Delete', function() {
 	this.timeout(5000);
     it('should create a new Todo, update it, verify the update, & delete it', function(done) {
 		// Build and log the path
-		var path = process.env.TODOS_ENDPOINT + "/todos";
+		// Added the HTTP env so that the tests can run against a local server
+		var path = process.env.HTTPorHTTPS + "://" + process.env.TODOS_ENDPOINT + "/todos";
 
 		// Fetch the comparison payload
 		require.extensions['.txt'] = function (module, filename) {
@@ -31,7 +32,7 @@ describe('Create, Update, Delete', function() {
 			var specificPath = path + "/" + todoOrig.id;
 			console.log('OrigTodo Id is: ' );
 			console.log(specificPath);
-			
+
 			// Update the item
 			var putOptions = {'url' : specificPath, 'form': JSON.stringify(updatePayload)};
 	 		request.put(putOptions, function (err, res, body){

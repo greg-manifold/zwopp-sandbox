@@ -6,17 +6,18 @@ describe('Create, Read, Delete', function() {
 	this.timeout(5000);
     it('should create a new Todo, read it, & delete it', function(done) {
 		// Build and log the path
-        var path = process.env.TODOS_ENDPOINT + "/todos";
+		// Added the HTTP env so that the tests can run against a local server
+		var path = process.env.HTTPorHTTPS + "://" + process.env.TODOS_ENDPOINT + "/todos";
 
 		// Fetch the comparison payload
 		require.extensions['.txt'] = function (module, filename) {
 		    module.exports = fs.readFileSync(filename, 'utf8');
 		};
 		var desiredPayload = require("./data/newTodo1.json");
-		
+
 		// Create the new todo
 		var options = {'url' : path, 'form': JSON.stringify(desiredPayload)};
- 		request.post(options, function (err, res, body){ 
+ 		request.post(options, function (err, res, body){
 			if(err){
 				throw new Error("Create call failed: " + err);
 			}
@@ -24,28 +25,28 @@ describe('Create, Read, Delete', function() {
 			var todo = JSON.parse(res.body);
 			// Read the item
 			var specificPath = path + "/" + todo.id;
-			request.get(path, function (err, res, body){ 
+			request.get(path, function (err, res, body){
 				if(err){
 					throw new Error("Read call failed: " + err);
 				}
 				assert.equal(200, res.statusCode, "Read Status Code != 200 (" + res.statusCode + ")");
-				
+
 				var todoList = JSON.parse(res.body);
 				if(todoList.text = desiredPayload.text)	{
 					// Item found, delete it
-		 			request.del(specificPath, function (err, res, body){ 
+		 			request.del(specificPath, function (err, res, body){
 						if(err){
 							throw new Error("Delete call failed: " + err);
 						}
-						assert.equal(200, res.statusCode, "Delete Status Code != 200 (" + res.statusCode + ")"); 
-						done();   
+						assert.equal(200, res.statusCode, "Delete Status Code != 200 (" + res.statusCode + ")");
+						done();
 		  			});
 				} else {
 					// Item not found, fail test
-					assert.equal(true, false, "New item not found in list."); 
+					assert.equal(true, false, "New item not found in list.");
 					done();
-				} 
-			}); 	
+				}
+			});
   		});
     });
 });

@@ -15,7 +15,7 @@
     "serverless-offline": "^3.14.2"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
+    "test": "./node_modules/.bin/mocha --recursive",
     "test:remote": "mkdir -p .build; . ./helper/setEnv.sh; npm run test",
     "clean": "rm -rf node_modules",
     "deploy": "./node_modules/.bin/serverless deploy | tee .build/deploy.out",

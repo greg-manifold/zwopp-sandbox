@@ -11,8 +11,9 @@ fs.readFile(__dirname + '/../.build/deploy.out', 'utf8', function (err,data) {
   for (var i = 0; lines.length > i; i++) {
     if(lines[i].indexOf("POST") > -1) {
 	  var startIndex = lines[i].indexOf("https://");
-	  var endIndex = lines[i].indexOf("/todos");
-	  console.log(lines[i].substring(startIndex, endIndex));
+    var slash1 = lines[i].indexOf("/", startIndex + 8);
+    var slash2 = lines[i].indexOf("/", slash1 + 1);
+	  console.log(lines[i].substring(startIndex, slash2));
 	  i = lines.length;
     }
   }
